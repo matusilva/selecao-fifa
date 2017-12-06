@@ -1,52 +1,52 @@
 package Selecao_FIFA;
 
-public class Main {
-
-	public static void opcoes() {
-		System.out.println("	--OPÇÕES:--");
-		System.out.println("1 - Mostar Seleção da FIFA");
-		System.out.println("2 - Detalhar Jogador");
-		System.out.println("3 - Listar Jogador por Posição");
-		System.out.println("4 - Votar no Melhor da Temporada");
+public class Main 
+{
+	static private Jogador jogadores[];
+	static private int quantidadeDeJogadores;
+	
+	public void adicionarJogador(Jogador novoJogador) 
+	{
+		jogadores[quantidadeDeJogadores] = novoJogador;
+		quantidadeDeJogadores++;
 	}
+	
+	public Jogador buscarJogador(String nome) 
+	{
 
-	public static void main(String[] args) {
+		for (int i = 0; i < quantidadeDeJogadores; ++i) 
+		{
+			String j = jogadores[i].getNome();
+			if (nome.equals(j))
+				return jogadores[i];
+		}
+		return null;
+	}
+	
+	
+	public static void menu() 
+	{
+		System.out.println("1 - Adicionar Jogador a Seleção");
+		System.out.println("2 - Pesquisar Jogador pelo Nome");
+		System.out.println("3 - Pesquisar Jogador pela Posição\n");
+		System.out.println("Digite as opções para Acessar o Menu:");
+	}
+	
+	public static void main(String[] args) 
+	{
 		java.util.Scanner sc = new java.util.Scanner(System.in);
-		Jogadores j = new Jogadores();
-		Usuario user = new Usuario();
+		Jogador jogador = new Jogador();
+		Usuario usuario = new Usuario();
 		
+		System.out.println("Digite Seu Nome para Entrar:");
+		String nome = sc.nextLine();
+		usuario.setNome(nome);
+		System.out.println("----Olá "+ usuario.getNome() +", Bem Vindo!----\n");
 		int opcao;
-		do {
-			opcoes();
-			System.out.println("DIGITE UMA OPÇÃO: ");
-			opcao = sc.nextInt();
-			
-			if(opcao == 1) {
-				Selecao s = j.MostarSelecao();
-			}
-			if(opcao == 2) {
-				System.out.println("Digite o Numero do Jogador que você queira detalhar\n");
-				int n = sc.nextInt();
-				Selecao s = j.Detalhar(n);
-			}
-			if(opcao == 3) {
-				System.out.println("Digite a Posição: (Goleiros, Defensores, Meio-Campistas ou Atacantes)");
-				String p = sc.next();
-				Selecao s = j.Posicao(p);
-			}
-			if(opcao == 4) {
-				System.out.println("Digite seu Nome para continuar:");
-				String nome = sc.next();
-				user.setNome(nome);
-				System.out.println("Digite a Data do seu Nascimento");
-				
-			}
-			if(opcao == 5) {
-				
-			}
 		
-		}while(opcao != 9);
-
+		do {
+		menu();
+		opcao = sc.nextInt();
+		} while(opcao != 9);
 	}
-
 }
