@@ -1,20 +1,21 @@
 package Selecao_FIFA;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Posicao 
 {
-	private String descricao;
-	private ArrayList<Jogador> jogadores;
+	private String nome;
 	
-	public void setDescricao(String descricao) 
+	public void setNome(String nome) 
 	{
-		this.descricao = descricao;
+		this.nome = nome;
 	}
-	public String getDescricao() 
+	public String getNome() 
 	{
-		return descricao;
+		return nome;
 	}
 	
-	
+	public String toString() {
+		return this.nome;
+	}
 }

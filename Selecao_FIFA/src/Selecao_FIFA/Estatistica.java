@@ -2,40 +2,46 @@ package Selecao_FIFA;
 
 public class Estatistica 
 {
-	private int gols;
-	private int assistencias;
-	private int jogos;
+	private float gols;
+	private float assistencias;
+	private float jogos;
 	
-	public void setGols(int gols) 
+	public void setGols(float gols) 
 	{
 		this.gols = gols;
 	}
-	public int getGols() 
+	public float getGols() 
 	{
 		return gols;
 	}
 	
-	public void setAssistencias(int assistencias) 
+	public void setAssistencias(float assistencias) 
 	{
 		this.assistencias = assistencias;
 	}
-	public int getAssistencias() 
+	public float getAssistencias() 
 	{
 		return assistencias;
 	}
 	
-	public void setJogos(int jogos) 
+	public void setJogos(float jogos) 
 	{
 		this.jogos = jogos;
 	}
-	public int getJogos() 
+	public float getJogos() 
 	{
 		return jogos;
 	}
 	
 	public float mediaGols() 
 	{
-		float mediaGols = jogos/gols;
+		float mediaGols = gols/jogos;
 		return mediaGols;
 	}
+	public float participacaoGols() 
+	{
+		float participacaoGols = gols + assistencias;
+		return participacaoGols;
+	}
+	
 }

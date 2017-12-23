@@ -1,4 +1,5 @@
 package Selecao_FIFA;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -10,8 +11,16 @@ public class Jogador
 	private Calendar dataNascimento;
 	private Posicao posicao;
 	
+	java.util.Scanner sc = new java.util.Scanner(System.in);
 	
-	
+	public Posicao getPosicao() 
+	{
+		return posicao;
+	}
+	public void setPosicao(Posicao posicao) 
+	{
+		this.posicao = posicao;
+	}
 	public void setNome(String nome) 
 	{
 		this.nome = nome;
@@ -59,8 +68,10 @@ public class Jogador
 		{
 			idade--;
 		} 
-		
 		return idade;
 	}
-	
+	public String toString() {
+		return this.nome;
+		
+	}
 }
