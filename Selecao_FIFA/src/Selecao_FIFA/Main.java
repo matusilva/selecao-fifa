@@ -21,6 +21,8 @@ public class Main
 		System.out.println("6 - Buscar Posição Cadastrada:");
 		System.out.println("7 - Remover Posição");
 		System.out.println("8 - Adicionar Posição ao Jogador");
+		System.out.println("9 - Listar Jogadores por Posição");
+		System.out.println("10 - Inserir Nota ao Jogador");
 		System.out.println("0 - SAIR:");
 		System.out.println("\nDigite as opções para Acessar o Menu:");
 	}
@@ -281,26 +283,21 @@ public class Main
 		{
 			System.out.println("Digite a Posição:");
 			String nomePosicao = sc.next();
-			Posicao posicao = null;
+			ArrayList<Jogador> lista = jogadores;
 			int i;
 			if(posicoes.isEmpty()) 
 			{
 				System.out.println("Nenhuma Posição foi cadastrada!\n");
 			}else {
-				for(i = 0; i < posicoes.size(); i++)
+				for(i = 0; i < lista.size(); i++)
 				{
-					Posicao p = posicoes.get(i);
-					Jogador lista = jogadores.get(i);
-					if(p.getNome().equals(nomePosicao)) 
-					{
-						posicao = p;
-						
-						System.out.println(lista.getPosicao()+ ": " + lista.getNome());
-					}else {
-						break;
-					}
+					Jogador j = lista.get(i);
 					//Jogador lista = jogadores.get(i);
-					//System.out.println(lista.getPosicao()+ ": " + lista.getNome());
+					if(j.getPosicao().toString().equals(nomePosicao)) 
+					{	
+						System.out.println(j.getNome());
+					}
+					
 				}
 				
 			}
