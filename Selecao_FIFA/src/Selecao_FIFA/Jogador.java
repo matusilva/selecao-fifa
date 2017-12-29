@@ -56,6 +56,7 @@ public class Jogador
 	public String getDataNascimento() {
 		return this.dataNascimento.toString();
 	}
+	
 	public int getIdade() 
 	{
 		Calendar atual = GregorianCalendar.getInstance();
@@ -74,4 +75,5 @@ public class Jogador
 		return this.nome;
 		
 	}
+	
 }

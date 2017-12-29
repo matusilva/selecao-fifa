@@ -1,24 +1,27 @@
 package Selecao_FIFA;
+
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
 
 public class Main 
 {
 	static ArrayList<Jogador> jogadores;
 	static ArrayList<Posicao> posicoes;
 	
+	
 	public static void menu() 
 	{
-		System.out.println("---- MENU DA SELEÇÃO DA FIFA ----");
+		System.out.println("----- MENU SELEÇÃO DA FIFA -----");
 		System.out.println("1 - Cadastrar Jogador na Seleção:");
-		System.out.println("2 - Pesquisar Jogador pelo Nome:");
+		System.out.println("2 - Buscar Jogador Cadastrado:");
 		System.out.println("3 - Remover Jogador:");
 		System.out.println("4 - Listar Jogadores Cadastrados:");
 		System.out.println("5 - Cadastrar Posição:");
-		System.out.println("6 - Pesquisar Posição Cadastrada:");
+		System.out.println("6 - Buscar Posição Cadastrada:");
 		System.out.println("7 - Remover Posição");
 		System.out.println("8 - Adicionar Posição ao Jogador");
-		System.out.println("9 - Pesquisar Jogador pela Posição");
-		System.out.println("10 - SAIR:");
+		System.out.println("0 - SAIR:");
 		System.out.println("\nDigite as opções para Acessar o Menu:");
 	}
 	public static void menuPosicoes() 
@@ -30,20 +33,41 @@ public class Main
 		System.out.println("---- Atacante ----");
 	}
 	
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
 		java.util.Scanner sc = new java.util.Scanner(System.in);
 		jogadores = new ArrayList<Jogador>();
 		posicoes = new ArrayList<Posicao>();
+		
 		Usuario usuario = new Usuario();
 		Estatistica status = new Estatistica();
-		System.out.println("Digite Seu Nome para Entrar:");
+		Temporada temporada = new Temporada();
+		
+		System.out.print("Digite Seu Nome para Entrar: ");
 		String nomeUsuario = sc.nextLine();
 		usuario.setNome(nomeUsuario);
-		System.out.println("----Olá "+ usuario.getNome() +", Bem Vindo!-----\n");
-		int opcao;
+		System.out.println("----Olá "+ usuario.getNome() +", Bem Vindo!-----");
 		
+		System.out.println("Digite a Data da temporada Inical: ");
+		int diaI, anoI;
+		System.out.print("Ano: ");
+		anoI = sc.nextInt();
+		System.out.print("Dia: ");
+		diaI = sc.nextInt();		
+		temporada.setDataInicio(anoI, diaI);
+		
+		System.out.println("Digite a Data da temporada Final: ");
+		int diaF, anoF;
+		System.out.print("Ano: ");
+		anoF = sc.nextInt();
+		System.out.print("Dia: ");
+		diaF = sc.nextInt();
+		temporada.setDataFim(anoF, diaF);
+		
+		int opcao;
 		do {
+		
+		System.out.println("TEMPORADA: "+ temporada.getDataInicio()+ " / " + temporada.getDataFim());
 		menu();
 		opcao = sc.nextInt();
 		
@@ -51,40 +75,49 @@ public class Main
 		{
 			System.out.println("Digite o Nome do Jogador: ");
 			String nomeJogador = sc.next();
-			Jogador jogador = new Jogador();
-			jogador.setNome(nomeJogador);
-			jogadores.add(jogador);
 			
 			System.out.println("Digite a nacionalidade: ");
 			String pais = sc.next();
+			
 			System.out.println("Digite o Time que Joga: ");
 			String time = sc.next();
 			
+			System.out.println("Data de nascimento ");
+			int dianasc, mesnasc, anonasc;
+			System.out.print("Dia: ");
+			dianasc = sc.nextInt();
+			System.out.print("Mês: ");
+			mesnasc = sc.nextInt();
+			System.out.print("Ano: ");
+			anonasc = sc.nextInt();
+	
 			System.out.println("Digite a quantidade de Jogos na temporada: ");
 			int jogos = sc.nextInt();
-			
 			System.out.println("Digite a quantidade de Gols na temporada: ");
 			int gols = sc.nextInt();
-			
 			System.out.println("Digite a quantidade de Assistências na temporada ");
 			int assist = sc.nextInt();
 			
-			jogador.setTime(time);
+			Jogador jogador = new Jogador();
+			jogador.setNome(nomeJogador);
 			jogador.setPais(pais);
+			jogador.setTime(time);
+			jogador.setDataNascimento(anonasc, mesnasc, dianasc);
+			
 			status.setJogos(jogos);
 			status.setGols(gols);
 			status.setAssistencias(assist);
-
-			System.out.println("--- Jogador Cadastrado com Sucesso! ---");
-			System.out.println("Jogador: " + jogador.getNome()+ "\n" + "Nacionalidade: " + jogador.getPais() + "\n" + "Time: " + jogador.getTime());
-			System.out.println("Media: " + status.mediaGols() + "\n" + "Total de Participação em Gols: " + status.participacaoGols());
 			
+			jogadores.add(jogador);
+			System.out.println("--- Jogador Cadastrado com Sucesso! ---");
+			System.out.println("Jogador: " + jogador.getNome()+ "\n" + "Nacionalidade: " + jogador.getPais() + "\n" + "Time: " + jogador.getTime() + "\n" + "Idade: " + jogador.getIdade()+ " anos");
+			System.out.println("Media de " + status.mediaGols() +"por jogo" + "\n" + "Total de Participação em Gols: " + status.participacaoGols());
 			
 		}
 		
 		if(opcao == 2) 
 		{
-			System.out.println("Digite o Nome do Jogador que você quer pesquisar:");
+			System.out.println("Digite o Nome do Jogador que você quer buscar:");
 			String nomeJogador = sc.next();
 			Jogador jogador = null;
 			for (int i = 0; i < jogadores.size(); i++) 
@@ -101,7 +134,7 @@ public class Main
 				System.out.println("Jogador não encontrado!\n");
 			} else 
 			{
-				System.out.println("Jogador encontrado: "+jogador.getNome()+"\n");
+				System.out.println("Jogador encontrado: "+jogador.getNome());
 			}
 		}
 		
@@ -132,7 +165,7 @@ public class Main
 		
 		if(opcao == 4) 
 		{
-			System.out.println("Jogadores Cadastrados:\n");
+			System.out.println("Jogadores Cadastrados:");
 			if(jogadores.isEmpty()) 
 			{
 				System.out.println("Nenhum Jogador foi cadastrado!\n");
@@ -140,7 +173,7 @@ public class Main
 				for(int i = 0; i < jogadores.size(); i++)
 				{
 					Jogador lista = jogadores.get(i);
-					System.out.println(lista);
+					System.out.println(lista.getPosicao()+ ": " + lista.getNome());
 				}
 			}
 		}
@@ -225,13 +258,12 @@ public class Main
 			} else {
 				System.out.println("Jogador encontrado: "+jogador.getNome());
 				
-				//Listar posicoes
 				System.out.println("Posições Cadastradas:");
 				for (int i = 0 ; i < posicoes.size(); i++) 
 				{
 					System.out.println(" " + i + " - "+posicoes.get(i).getNome());
 				}
-				// pedir para usuario digitar numero da posicao
+				
 				System.out.println("Digite o numero da posição:");
 				int p = sc.nextInt();
 				if(p == 0 || p == 1 || p == 2 || p == 3) 
@@ -247,19 +279,64 @@ public class Main
 		
 		if(opcao == 9) 
 		{
-			StringBuilder sb = new StringBuilder();
-			for(int i = 0; i < jogadores.size(); ++i) 
+			System.out.println("Digite a Posição:");
+			String nomePosicao = sc.next();
+			Posicao posicao = null;
+			int i;
+			if(posicoes.isEmpty()) 
+			{
+				System.out.println("Nenhuma Posição foi cadastrada!\n");
+			}else {
+				for(i = 0; i < posicoes.size(); i++)
+				{
+					Posicao p = posicoes.get(i);
+					Jogador lista = jogadores.get(i);
+					if(p.getNome().equals(nomePosicao)) 
+					{
+						posicao = p;
+						
+						System.out.println(lista.getPosicao()+ ": " + lista.getNome());
+					}else {
+						break;
+					}
+					//Jogador lista = jogadores.get(i);
+					//System.out.println(lista.getPosicao()+ ": " + lista.getNome());
+				}
+				
+			}
+		}
+		
+		if(opcao == 10) 
+		{
+			Nota n = new Nota();
+			System.out.println("Digite o nome do Jogador que deseja dar a nota");
+			String nomeJogador = sc.next();
+			Jogador jogador = null;
+			for (int i = 0; i < jogadores.size(); i++) 
 			{
 				Jogador j = jogadores.get(i);
-				sb.append(j.getPosicao());
-				sb.append(": ");
-				sb.append(j.getNome());
-				sb.append("\n");
+				if (j.getNome().equals(nomeJogador)) 
+				{
+					jogador = j;
+					break;
+				}
 			}
-			System.out.println(sb.toString());
+			if (jogador == null) 
+			{
+				System.out.println("Jogador não encontrado!\n");
+			} else 
+			{
+				System.out.println("Digite seu Voto");
+				int nota = sc.nextInt();
+				n.setNota(nota);
+				System.out.println("NOTA:" + n.getNota() + " para " + jogador.getNome());
+				//System.out.println("Jogador encontrado: "+jogador.getNome());
+			}
 		}
+		
+		
 			
-		} while(opcao != 10);{
+		} while(opcao != 0);{
 			sc.close();
 			System.exit(0);
 		}
