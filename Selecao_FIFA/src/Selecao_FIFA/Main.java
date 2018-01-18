@@ -8,6 +8,7 @@ public class Main
 {
 	static ArrayList<Jogador> jogadores;
 	static ArrayList<Posicao> posicoes;
+	static ArrayList<Nota> notas;
 	
 	
 	public static void menu() 

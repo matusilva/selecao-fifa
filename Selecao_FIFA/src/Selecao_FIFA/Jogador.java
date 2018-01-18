@@ -11,7 +11,6 @@ public class Jogador
 	private Calendar dataNascimento;
 	private Posicao posicao;
 	
-	java.util.Scanner sc = new java.util.Scanner(System.in);
 	
 	public Posicao getPosicao() 
 	{
